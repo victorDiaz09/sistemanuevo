@@ -140,7 +140,7 @@
             </p>
             <p><strong>Fecha de envío:</strong> {{ $datos->fecha_salida }}</p>
             <p><strong>Fecha de recojo:</strong> {{ $datos->fecha_recojo }}</p>
-            <p><strong>Estado de pago:</strong>
+            <p><strong>Estado de Envío:</strong>
                 @if ($datos->envio_estado == 1)
                     <a class="azul">{{ strtoupper($datos->nombre) }}</a>
                 @else
