@@ -59,10 +59,10 @@
             <thead class="table-primary">
                 <tr>
                     <th>Id</th>
-                    <th>Numero Reg.</th>
+                    <th>Manifiesto</th>
                     <th>Consignatario</th>
                     <th>Lugar Destino</th>
-                    <th>Precio</th>
+                    <th>Valor Flete</th>
                     <th>Descripcion</th>
                     <th>Estado Pago</th>
                     <th>Estado Envio</th>
@@ -83,7 +83,7 @@
 
         <a href="{{ route('envio.reporteEnvio') }}" target="_blank" class="btn btn-rounded bg-primary"><i
                 class="fas fa-file-pdf"></i>&nbsp;
-            Reporte</a>
+            Reporte</a> 
 
         <form onsubmit="return confimar_eliminar()" action="{{ route('envio.eliminarTodo') }}" method="get"
             class="d-inline formulario-eliminar">
@@ -105,15 +105,15 @@
                 <thead class="table-primary">
                     <tr>
                         <th>Id</th>
-                        <th>Numero Reg.</th>
+                        <th>Manifiesto</th>
                         {{-- <th>Remitente</th> --}}
                         <th>Consignatario</th>
                         {{-- <th>Fecha de envio</th> --}}
-                        {{-- <th>Fecha de recojo</th> --}}
+                        {{-- <th>Fecha de entrega</th> --}}
                         {{-- <th>Lugar Salida</th> --}}
                         <th>Lugar Destino</th>
                         {{-- <th>Cant.</th> --}}
-                        <th>Precio</th>
+                        <th>Valor Flete</th>
                         <th>Descripcion</th>
                         <th>Estado Pago</th>
                         <th>Estado Envio</th>
@@ -134,7 +134,7 @@
                             <td>{{ $item->hasta_distrito_nombre }} - {{ $item->hasta_provincia_nombre }} -
                                 {{ $item->hasta_departamento_nombre }}</td>
                             {{-- <td>{{ $item->cantidad }}</td> --}}
-                            <td><b>S/.{{ $item->precio }}</b></td>
+                            <td><b>$ {{ $item->precio }}</b></td>
                             <td>{{ $item->descripcion }}</td>
                             <td>
                                 @if ($item->pago_estado == '1')

@@ -13,165 +13,206 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <!-- Styles -->
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            overflow: hidden;
-        }
-
-        .fondo {
-            width: 100%;
-            height: 100vh;
-            background-image: url("{{ asset('img-inicio/fondo.jpg') }}");
-            background-size: cover;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 42px;
-            color: rgb(255, 255, 255);
-            padding: 10px;
-            font-weight: bold;
-        }
+    * h1 {
+        text-align: center;
+        font-size: 42px;
+        color: #A39EEA;
+        padding: 10px;
+        font-weight: bold;
+    }
 
 
+    .s {
+        text-align: center;
+        font-size: 25px;
+        color: black;
+        padding: 10px;
+        font-weight: bold;
+
+    }
+
+
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 300px;
+        /* Ajusta el ancho del formulario según tus necesidades */
+
+    }
+
+    input {
+        padding: 20px;
+        outline: none;
+        font-size: 20px;
+        font-style: italic;
+    }
+
+    input:focus {
+        font-style: normal;
+        font-weight: 500;
+    }
+
+    .entrada,
+    .salida {
+        padding: 17px 10px;
+        outline: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        width: 100%;
+        text-decoration: none;
+        text-align: center;
+        border-radius: 35px;
+
+    }
+
+    .entrada {
+        background: rgb(0, 119, 199);
+
+    }
+
+
+    .entrada:hover {
+        background: rgb(1, 99, 164);
+    }
+
+    p {
+        text-align: center;
+        font-size: 23px;
+        font-weight: 500;
+        color: rgb(190, 190, 190);
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+
+    .login {
+        font-style: oblique;
+        font-size: 25px;
+        font-weight: 500;
+        color: #000000;
+        text-align: center;
+    }
+
+    .group__button {
+        width: 100%;
+        padding: 0;
+        display: flex;
+
+    }
+
+    .marca {
+        width: 100%;
+        margin: 0;
+        background: rgb(13, 39, 48);
+        position: fixed;
+        bottom: 0;
+        z-index: 999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .marca__texto {
+        color: rgb(0, 162, 255);
+        text-decoration: underline;
+    }
+
+
+    .error {
+        color: red;
+        font-size: 18px;
+    }
+
+    @media screen and (max-width:400px) {
         div.container {
-            width: 50%;
-            max-width: 680px;
-            min-width: 400px;
-            background: rgba(2, 12, 31, 0.326);
-            margin: auto;
-            padding: 20px;
-        }
-
-        .form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px
-        }
-
-        input {
-            padding: 20px;
-            outline: none;
-            font-size: 20px;
-            font-style: italic;
-        }
-
-        input:focus {
-            font-style: normal;
-            font-weight: 500;
-        }
-
-        .entrada,
-        .salida {
-            padding: 17px 10px;
-            outline: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
             width: 100%;
-            text-decoration: none;
-            text-align: center;
-            font-weight: bold;
+            min-width: 100%;
         }
+    }
 
-        .entrada {
-            background: rgb(0, 119, 199);
-        }
+    .log-div {
+        background-color: #9EB7EA;
+        border-radius: 15px !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
+    .login-card-body {
+        border-radius: 0px !important;
+        justify-content: center;
+        align-items: center;
+    }
 
-        .entrada:hover {
-            background: rgb(1, 99, 164);
-        }
-
-        p {
-            text-align: center;
-            font-size: 23px;
-            font-weight: 500;
-            color: rgb(190, 190, 190);
-            margin-bottom: 0;
-            margin-top: 0;
-        }
-
-        .login {
-            font-style: italic;
-            font-size: 20px;
-            font-weight: 500;
-            color: rgb(156, 156, 156);
-        }
-
-        .group__button {
-            width: 100%;
-            padding: 0;
-            display: flex;
-
-        }
-
-        .marca {
-            width: 100%;
-            margin: 0;
-            background: rgb(13, 39, 48);
-            position: fixed;
-            bottom: 0;
-            z-index: 999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-        }
-
-        .marca__texto {
-            color: rgb(0, 162, 255);
-            text-decoration: underline;
-        }
+    .input-group-text {
+        border: 5px solid black;
 
 
-        .error {
-            color: red;
-            font-size: 18px;
-        }
+    }
 
-        @media screen and (max-width:400px) {
-            div.container {
-                width: 100%;
-                min-width: 100%;
-            }
-        }
+    .form-control {
+        border: 1px solid black;
+
+    }
     </style>
-
+    <link rel="stylesheet" href="{{ asset('bootstrap4/css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('inicio/css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/fontawesome.min.css') }}">
+    <link href="https://tresplazas.com/web/img/big_punto_de_venta.png" rel="shortcut icon">
+    <title>Inicio de sesión</title>
 
 </head>
 
-<body class="antialiased">
-    <div class="fondo">
-        <div class="container">
-            <a class="login" href="{{ route('home') }}">Ingresar al sistema</a>
-            @foreach ($empresa as $item)
-                <h1>{{ $item->nombre }}</h1>
-            @endforeach
-            <form action="{{ route('buscar.buscarEnvioCliente') }}" method="get">
-                <div class="form">
-                    <p>Ingrese su Número de Registro</p>
-                    <input required id="numero" autofocus type="number" name="numero"
-                        placeholder="Número de ticket / registro">
-                    @error('numero')
-                        <p class="error">Ingrese su Número de Ticket / Registro</p>
-                    @enderror
-                    <div class="group__button">
-                        <button id="entrada" class="entrada" type="submit">BUSCAR</button>
-                    </div>
-                    @if (session('INCORRECTO'))
-                        <div class="alert alert-danger">{{ session('INCORRECTO') }}</div>
-                    @endif
+<body>
 
+    <img class="wave" src="{{ asset('img-inicio/camiones.webp') }}">
+    <div class="container-fluid">
+    <div class="row">
+
+    <div class="container" style="position: absolute; left: 75%; top: 7%;">
+
+        <div class="login-content">
+
+
+            <form action="{{ route('buscar.buscarEnvioCliente') }}" method="get">
+                @foreach ($empresa as $item)
+                <h1>{{ $item->nombre }}</h1>
+                @endforeach
+                @csrf
+                <img style="width: 60%;" src="{{ asset('img-inicio/LOGO.png') }}">
+
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <input required id="numero" autofocus type="text" name="numero"
+                            placeholder="Número de ticket / registro" title="ingrese su codigo">
+                        @error('numero')
+                        <p class="error">Ingrese su Número de Ticket / Registro</p>
+                        @enderror
+                    </div>
                 </div>
+                <div class="text-center">
+                    <a class="font-italic isai5" href="{{ route('home') }}">Iniciar Sesion</a>
+                </div>
+
+                <input name="entrada" class="btn" title="click para ingresar" type="submit" value="BUSCAR" id="entrada">
+
+                @if (session('INCORRECTO'))
+                <div class="alert alert-danger">{{ session('INCORRECTO') }}</div>
+                @endif
+                {{-- login --}}
             </form>
         </div>
     </div>
+    </div>
+</div>
 </body>
 
 </html>

@@ -1961,11 +1961,6 @@ CREATE TABLE `envio` (
 -- ----------------------------
 -- Records of envio
 -- ----------------------------
-INSERT INTO `envio` VALUES ('10', '1002', '11', '9', '2023-03-14 00:00:00', '0000-00-00 00:00:00', '978', 'los incas', '1039', 'rosa 1234', '2', 'sobres', '10', '1', '1', 'Isai Ismael Sandoval Ccaccro', '');
-INSERT INTO `envio` VALUES ('11', '1003', '8', '5', '2023-03-14 00:00:00', '0000-00-00 00:00:00', '98', 'ayacucho', '1067', 'ayacucho', '2', 'lleva 2 cajas de cajones', '5', '1', '1', 'Isai Ismael Sandoval Ccaccro', '');
-INSERT INTO `envio` VALUES ('12', '1005', '6', '5', '2023-03-15 00:00:00', '0000-00-00 00:00:00', '479', 'LOS ANGELES', '478', 'av. ejercito', '2', '2 sobre manila', '10', '1', '1', 'Isai Ismael Sandoval Ccaccro', '');
-INSERT INTO `envio` VALUES ('13', '1007', '6', '5', '2023-03-15 00:00:00', '2023-03-14 02:39:30', '479', 'LOS ANGELES', '846', 'av.ejercito', '2', '2 sobres', '10', '1', '3', 'Isai Ismael Sandoval Ccaccro', '');
-INSERT INTO `envio` VALUES ('14', '1008', '6', '10', '2023-04-24 00:00:00', '0000-00-00 00:00:00', '479', 'LOS ANGELES', '442', 'manzana 15 lote 20', '2', '2 sobres', '10', '1', '1', 'Isai Ismael Sandoval Ccaccro', '');
 
 -- ----------------------------
 -- Table structure for estado_envio

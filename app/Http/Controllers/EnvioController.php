@@ -12,7 +12,7 @@ class EnvioController extends Controller
     public function index()
     {
         $envio = DB::table('envio')
-            ->select('estado_envio.nombre', 'envio.id_envio', 'envio.numero_reg', 'envio.id_remitente', 'envio.id_receptor', 'envio.fecha_salida', 'envio.fecha_recojo', 'envio.desde_distrito', 'envio.desde_direccion', 'envio.hasta_distrito', 'envio.hasta_direccion', 'envio.cantidad', 'envio.descripcion', 'envio.precio', 'envio.pago_estado', 'envio.envio_estado', 'envio.registrado_por', 'envio.recepcionado_por', 'remitente.nombre_razon_social as nomRemitente', 'remitente.dni AS dniRemitente', 'receptor.dni AS dniReceptor', 'receptor.nombre_razon_social as nomReceptor', 'd1.Distrito AS desde_distrito_nombre', 'd2.Distrito AS hasta_distrito_nombre', 'prov1.Provincia AS desde_provincia_nombre', 'prov2.Provincia AS hasta_provincia_nombre', 'depa1.Departamento AS desde_departamento_nombre', 'depa2.Departamento AS hasta_departamento_nombre')
+            ->select('estado_envio.nombre', 'envio.id_envio', 'envio.numero_reg', 'envio.id_remitente', 'envio.id_receptor', 'envio.fecha_salida', 'envio.fecha_recojo', 'envio.desde_distrito', 'envio.desde_direccion', 'envio.hasta_distrito', 'envio.hasta_direccion', 'envio.cantidad', 'envio.descripcion', 'envio.conductor','envio.placas','envio.empresa','envio.documento','envio.placas2','envio.precio', 'envio.pago_estado', 'envio.envio_estado', 'envio.registrado_por', 'envio.recepcionado_por', 'remitente.nombre_razon_social as nomRemitente', 'remitente.dni AS dniRemitente', 'receptor.dni AS dniReceptor', 'receptor.nombre_razon_social as nomReceptor', 'd1.Distrito AS desde_distrito_nombre', 'd2.Distrito AS hasta_distrito_nombre', 'prov1.Provincia AS desde_provincia_nombre', 'prov2.Provincia AS hasta_provincia_nombre', 'depa1.Departamento AS desde_departamento_nombre', 'depa2.Departamento AS hasta_departamento_nombre')
             ->join('remitente', 'envio.id_remitente', '=', 'remitente.id_remitente')
             ->join('receptor', 'envio.id_receptor', '=', 'receptor.id_receptor')
             ->leftJoin('distritos as d1', 'envio.desde_distrito', '=', 'd1.idDist')
@@ -41,7 +41,7 @@ class EnvioController extends Controller
         departamentos.Departamento,distritos.idDist,provincias.idProv,departamentos.idDepa,
         sucursal.id_sucursal FROM usuario
         INNER JOIN sucursal ON usuario.id_sucursal = sucursal.id_sucursal
-        INNER JOIN distritos ON sucursal.distrito = distritos.idDist
+        INNER JOIN distritos ON distritos.idProv = distritos.idDist
         INNER JOIN provincias ON distritos.idProv = provincias.idProv
         INNER JOIN departamentos ON provincias.idDepa = departamentos.idDepa
          where id_usuario=$id_usuario");
@@ -54,6 +54,8 @@ class EnvioController extends Controller
     {
         $request->validate([
             "numero_envio" => "required",
+            "empresa" => "required",
+            "documento" => "required",
             "dni_del_remitente" => "required",
             "nombre_del_remitente" => "required",
             // "telefono_del_remitente" => "required",
@@ -72,6 +74,9 @@ class EnvioController extends Controller
             // "direccion_llegada" => "required",
             "cantidad" => "required",
             "precio" => "required",
+            "conductor" => "required",
+            "placas" => "required",
+            "placas2" => "required",
             // "estado_pago" => "required",
             "fecha_salida" => "required",
             "descripcion" => "required",
@@ -129,6 +134,8 @@ class EnvioController extends Controller
         $id_registro = DB::transaction(function () use ($numero, $idRemitente, $idReceptor, $request, $estadoPago, $id_usuario) {
             return DB::table('envio')->insertGetId([
                 'numero_reg' => $numero,
+                'empresa' => $request->empresa,
+                'documento' => $request->documento,
                 'id_remitente' => $idRemitente,
                 'id_receptor' => $idReceptor,
                 'fecha_salida' => $request->fecha_salida,
@@ -139,6 +146,9 @@ class EnvioController extends Controller
                 'hasta_direccion' => $request->direccion_llegada,
                 'cantidad' => $request->cantidad,
                 'descripcion' => $request->descripcion,
+                'conductor' => $request->conductor,
+                'placas' => $request->placas,
+                'placas2' => $request->placas2,
                 'precio' => $request->precio,
                 'pago_estado' => $estadoPago,
                 'envio_estado' => 1,
@@ -162,6 +172,8 @@ class EnvioController extends Controller
         $sql = DB::select(" SELECT
         envio.id_envio,
         envio.numero_reg,
+        envio.empresa,
+        envio.documento,
         envio.id_remitente,
         envio.id_receptor,
         date(envio.fecha_salida) as 'fecha_salida',
@@ -173,6 +185,9 @@ class EnvioController extends Controller
         envio.cantidad,
         envio.descripcion,
         envio.precio,
+        envio.conductor,
+        envio.placas,
+        envio.placas2,
         envio.pago_estado,
         envio.envio_estado,
         envio.registrado_por,
@@ -247,10 +262,13 @@ class EnvioController extends Controller
             "direccion_llegada" => "required",
             "distrito_llegada" => "required",
             "cantidad" => "required",
+            "conductor" => "required",
+            "placas" => "required",
+            "placas2" => "required",
             "precio" => "required",
             "fecha_salida" => "required",
             "descripcion" => "required",
-        ]);
+        ]);     
 
         $idRemitente = $request->idRemitente;
         $idReceptor = $request->idReceptor;
@@ -307,9 +325,9 @@ class EnvioController extends Controller
 
 
         try {
-            $actualizar = DB::update(" update envio set id_remitente=?, id_receptor=?, fecha_salida=?, fecha_recojo=?, desde_distrito=?, desde_direccion=?, hasta_distrito=?, hasta_direccion=?, cantidad=?, descripcion=?, precio=? where id_envio=$id ", [
-                $idRemitente, $idReceptor, $request->fecha_salida, $request->fecha_recojo, $request->distrito_partida,
-                $request->direccion_partida, $request->distrito_llegada, $request->direccion_llegada, $request->cantidad,
+            $actualizar = DB::update(" update envio set id_remitente=?, id_receptor=?, fecha_salida=?, fecha_recojo=?, desde_distrito=?, desde_direccion=?, hasta_distrito=?, hasta_direccion=?, cantidad=?, conductor=?, placas=?,  placas2=?, descripcion=?, precio=? where id_envio=$id ", [
+                $idRemitente, $idReceptor,$request->fecha_salida, $request->fecha_recojo, $request->distrito_partida,
+                $request->direccion_partida, $request->distrito_llegada, $request->direccion_llegada, $request->cantidad,$request->conductor,$request->placas, $request->placas2,
                 $request->descripcion, $request->precio
             ]);
             $actualizar = 1;
@@ -511,6 +529,8 @@ class EnvioController extends Controller
     {
         $datos = $sql = DB::select(" SELECT
         envio.id_envio,
+        envio.empresa,
+        envio.documento,
         envio.numero_reg,
         envio.id_remitente,
         envio.id_receptor,
@@ -523,6 +543,9 @@ class EnvioController extends Controller
         envio.cantidad,
         envio.descripcion,
         envio.precio,
+        envio.conductor,
+        envio.placas,
+        envio.placas2,
         envio.pago_estado,
         envio.envio_estado,
         envio.registrado_por,
@@ -579,6 +602,8 @@ class EnvioController extends Controller
         $datos = DB::select(" SELECT
         envio.id_envio,
         envio.numero_reg,
+        envio.empresa,
+        envio.documento,
         envio.id_remitente,
         envio.id_receptor,
         date(envio.fecha_salida) as 'fecha_salida',
@@ -588,6 +613,9 @@ class EnvioController extends Controller
         envio.hasta_distrito,
         envio.hasta_direccion,
         envio.cantidad,
+        envio.conductor,
+        envio.placas,
+        envio.placas2,
         envio.descripcion,
         envio.precio,
         envio.pago_estado,

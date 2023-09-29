@@ -12,9 +12,8 @@ body {
 .wave {
     position: fixed;
     bottom: 0;
-    left: 0;
     height: 100%;
-    z-index: -1;
+    z-index: 0;
 }
 
 .container {
@@ -72,7 +71,7 @@ form {
 }
 
 .i {
-    color: #d9d9d9;
+    color: #b86aa2;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,6 +79,7 @@ form {
 
 .i i {
     transition: 0.3s;
+    color:#3f01b2;
 }
 
 .input-div > div {
@@ -183,7 +183,7 @@ a:hover {
     border-radius: 25px;
     outline: none;
     border: none;
-    background: #24b201;
+    background: #3f01b2;
     background-size: 200%;
     font-size: 1.2rem;
     color: #fff;
@@ -195,8 +195,8 @@ a:hover {
 }
 .btn:hover {
     background-position: right;
-    background: #146500;
-    color: rgb(255, 255, 255);
+    background: #9663b0;
+    color: rgb(110, 60, 162);
 }
 
 @media screen and (max-width: 1050px) {

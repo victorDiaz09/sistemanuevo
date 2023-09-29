@@ -20,7 +20,7 @@
 
         .fondo {
             height: 100vh;
-            background-image: url("{{ asset('img-inicio/fondo.jpg') }}");
+            background-image: url("{{ asset('img-inicio/Cascadia.jpeg') }}");
             background-size: cover;
         }
 
@@ -123,8 +123,8 @@
             <div class="ticket">
                 <a href="{{ route('welcome') }}" class="descarga">Volver</a>
                 @foreach ($empresa as $item)
-                    <h1>{{ $item->nombre }}</h1>
-                    <a class="numero">Ticket N° {{ $datos->numero_reg }}</a>
+                    <h1>{{ $datos->empresa }}</h1>
+                    <a class="numero">Manifiesto N° {{ $datos->numero_reg }}</a>
                     <hr>
                     {{-- <h2>DATOS DE LA EMPRESA</h2>
                     <p><strong>Ubicacion:</strong> {{ $item->ubicacion }}</p>
@@ -133,13 +133,13 @@
                 @endforeach
                 <hr>
                 <h2>DATOS DEL REMITENTE</h2>
-                <p><strong>DNI:</strong> {{ $datos->dniRemitente }}</p>
+                <p><strong>Documento:</strong> {{ $datos->dniRemitente }}</p>
                 <p><strong>Nombre / Razon Social:</strong> {{ $datos->nomRemitente }}</p>
                 <p><strong>Teléfono:</strong> {{ $datos->remitenteTelefono }}</p>
                 <p><strong>Dirección:</strong> {{ $datos->remitenteDireccion }}</p>
                 <hr>
                 <h2>DATOS DEL CONSIGNATARIO</h2>
-                <p><strong>DNI:</strong> {{ $datos->dniReceptor }}</p>
+                <p><strong>Documento:</strong> {{ $datos->dniReceptor }}</p>
                 <p><strong>Nombre / Razon Social:</strong> {{ $datos->nomReceptor }}</p>
                 <p><strong>Teléfono:</strong> {{ $datos->receptorTelefono }}</p>
                 <p><strong>Dirección:</strong> {{ $datos->receptorDireccion }}</p>
@@ -153,6 +153,9 @@
                 </p>
                 <hr>
                 <h2>DATOS DEL ENVÍO</h2>
+                <p><strong>Conductor:</strong> {{ $datos->conductor }}</p>
+                <p><strong>Placas Furgon:</strong> {{ $datos->placas }}</p>
+                <p><strong>Placas Cabezal:</strong> {{ $datos->placas2 }}</p>
                 <p><strong>Cantidad:</strong> {{ $datos->cantidad }}</p>
                 <p><strong>Precio:</strong> {{ $datos->precio }}</p>
                 <p><strong>Estado de pago:</strong>
@@ -163,7 +166,7 @@
                     @endif
                 </p>
                 <p><strong>Fecha de envío:</strong> {{ $datos->fecha_salida }}</p>
-                <p><strong>Fecha de recojo:</strong> {{ $datos->fecha_recojo }}</p>
+                <p><strong>Fecha de Entrega:</strong> {{ $datos->fecha_recojo }}</p>
                 <p><strong>Estado de Envío:</strong>
                     @if ($datos->envio_estado == 1)
                         <a class="azul">{{ strtoupper($datos->nombre) }}</a>

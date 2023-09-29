@@ -15,15 +15,14 @@
 </head>
 
 <body>
-    <img class="wave" src="{{ asset('inicio/img/wave.png') }}">
-    <div class="container">
+    <img class="wave" src="{{ asset('img-inicio/Cascadia.jpeg') }}">
+    <div class="container" style="position: absolute; left: 40%; top: 8%;">
         <div class="img">
-            <img src="{{ asset('inicio/img/bg.svg') }}">
         </div>
         <div class="login-content">
             <form method="POST" action="{{ route('login') }}">
                 @csrf
-                <img src="{{ asset('inicio/img/avatar.svg') }}">
+                <img style="width: 60%;" src="{{ asset('img-inicio/LOGO.png') }}">
                 <h2 class="title">BIENVENIDO</h2>
                 @if (session('mensaje'))
                     <div class="alert alert-warning alert-dismissible fade show mb-0" role="alert">

@@ -13,7 +13,7 @@
                 <div class="row">
                     <!--.col-->
                     <div class="col-12 col-sm-6 col-lg-3">
-                        <article class="statistic-box green">
+                        <article class="statistic-box purple">
                             <div>
                                 <div class="number text-light">{{ $envioHoy }}</div>
                                 <div class="caption">
@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="col-12 col-sm-6 col-lg-3">
-                        <article class="statistic-box red">
+                        <article class="statistic-box purple">
                             <div>
                                 <div class="number text-light">{{ $envioHoyNoRecepcionado }}</div>
                                 <div class="caption">
@@ -48,7 +48,7 @@
 
                     <!--.col-->
                     <div class="col-12 col-sm-6 col-lg-3">
-                        <article class="statistic-box yellow">
+                        <article class="statistic-box purple">
                             <div>
                                 <div class="number text-light">{{ $usuarios }}</div>
                                 <div class="caption">
